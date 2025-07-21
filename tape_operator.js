@@ -1,6 +1,8 @@
 (function() {
     'use strict';
 
+    console.log('Tape Operator: Плагин загружен');
+
     /**
      * Этот плагин добавляет интеграцию с плеером Tape Operator в Lampa.
      * Он добавляет кнопку в карточку фильма/сериала, которая генерирует
@@ -28,6 +30,7 @@
 
     // Функция для создания и добавления кнопки в интерфейс Lampa
     function addButton(e) {
+        console.log('Tape Operator: Вызвана функция addButton', e);
         var movie = e.data.movie;
 
         // Иконка-баннер из оригинального скрипта Tape Operator
@@ -74,15 +77,18 @@
         });
 
         e.body.find('.videos__buttons').append(button);
+        console.log('Tape Operator: Кнопка должна была добавиться');
     }
 
     // Запуск плагина
     function startPlugin() {
+        console.log('Tape Operator: Вызвана функция startPlugin');
         if (window.plugin_tape_operator_started) return;
         window.plugin_tape_operator_started = true;
 
         // Следим за событием отрисовки детальной карточки
         Lampa.Listener.follow('full', function(e) {
+            console.log('Tape Operator: Сработало событие "full"', e);
             if (e.type == 'render') {
                 addButton(e);
             }
